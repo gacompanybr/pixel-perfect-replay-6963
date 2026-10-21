@@ -589,7 +589,7 @@ function Index() {
       </a>
 
       {/* Lightbox */}
-      {lightbox !== null && (
+      {lightbox !== null && galeria[lightbox] && (
         <div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-navy/90 p-6"
           onClick={() => setLightbox(null)}
