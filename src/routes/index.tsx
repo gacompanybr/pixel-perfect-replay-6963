@@ -119,7 +119,7 @@ function Index() {
       {/* Início */}
       <section id="inicio" className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 lg:min-h-[70vh] lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-5">
-          <p className="eyebrow text-muted-foreground">Desde há mais de 18 anos</p>
+          <p className="eyebrow text-muted-foreground">Há mais de 18 anos no mercado</p>
           <h1 className="mt-6 font-serif text-4xl leading-tight text-primary md:text-5xl">
             Vidros e esquadrias de alumínio sob medida.
           </h1>
