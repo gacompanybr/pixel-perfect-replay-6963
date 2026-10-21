@@ -228,9 +228,10 @@ function Index() {
   return (
     <div className="bg-background text-foreground">
       <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
-        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 md:h-28">
           <a href="#inicio" aria-label="YAMA Vidros e Alumínio">
-            <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-16 w-16 object-contain" />
+            <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-20 w-20 object-contain md:h-24 md:w-24" />
+
           </a>
           <nav className="hidden items-center gap-8 lg:flex">
             {nav.map(([l, h]) => (
@@ -289,9 +290,9 @@ function Index() {
             <p className="mt-2 text-sm text-muted-foreground">anos de mercado</p>
             <img
               src={quemSomos}
-              alt="Detalhe arquitetônico de vidro e alumínio"
+              alt="Ambiente moderno com painéis de vidro e esquadrias de alumínio"
               width={1600}
-              height={1067}
+              height={1200}
               loading="lazy"
               className="mt-10 aspect-[4/3] w-full object-cover"
             />
@@ -349,11 +350,6 @@ function Index() {
                 </WaCta>
               </article>
             ))}
-          </div>
-          <div className="mt-20 border-t border-border pt-12 text-center">
-            <p className="font-serif text-2xl text-primary">Não encontrou exatamente o que procura?</p>
-            <p className="mt-3 text-muted-foreground">Trabalhamos com soluções sob medida. Conte para nós o que você precisa.</p>
-            <WaCta className="mt-8 bg-primary px-6 py-4 text-primary-foreground">Falar com a YAMA</WaCta>
           </div>
         </div>
       </section>
@@ -518,6 +514,18 @@ function Index() {
         </div>
       </section>
 
+      {/* Não encontrou o que procura? — Fale conosco */}
+      <section className="bg-navy text-navy-foreground">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-center">
+          <p className="eyebrow text-navy-muted">Fale conosco</p>
+          <h2 className="mt-4 font-serif text-4xl">Não encontrou o que procura?</h2>
+          <p className="mx-auto mt-6 max-w-2xl leading-relaxed text-navy-muted">
+            Trabalhamos com soluções sob medida em vidro e alumínio. Conte para nós o que o seu projeto precisa — a YAMA desenvolve a solução ideal para você.
+          </p>
+          <WaCta className="mt-10 bg-navy-foreground px-8 py-4 text-navy">Fale conosco pelo WhatsApp</WaCta>
+        </div>
+      </section>
+
       {/* Contato */}
       <section id="contato" className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid gap-12 lg:grid-cols-2">
@@ -572,7 +580,7 @@ function Index() {
 
       <footer className="bg-navy text-navy-muted">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-14 w-14 object-contain" />
+          <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-16 w-16 object-contain" />
           <p className="text-xs">© {new Date().getFullYear()} YAMA Vidros e Alumínio · Duartina - SP</p>
         </div>
       </footer>
