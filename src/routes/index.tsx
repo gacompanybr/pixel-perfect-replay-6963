@@ -290,9 +290,9 @@ function Index() {
             <p className="mt-2 text-sm text-muted-foreground">anos de mercado</p>
             <img
               src={quemSomos}
-              alt="Detalhe arquitetônico de vidro e alumínio"
+              alt="Ambiente moderno com painéis de vidro e esquadrias de alumínio"
               width={1600}
-              height={1067}
+              height={1200}
               loading="lazy"
               className="mt-10 aspect-[4/3] w-full object-cover"
             />
