@@ -47,6 +47,10 @@ const SERVICOS = [
 const PRAZOS = ["O quanto antes", "Nas próximas semanas", "Nos próximos meses", "Ainda estou pesquisando"];
 const CONTATOS = ["WhatsApp", "Ligação", "E-mail"];
 
+type FormErrors = Partial<
+  Record<"nome" | "whatsapp" | "email" | "cidade" | "servico" | "descricao" | "fotos", string>
+>;
+
 const MAX_FOTOS = 5;
 const MAX_BYTES = 5 * 1024 * 1024;
 const TIPOS = ["image/jpeg", "image/png", "image/webp"];
@@ -107,7 +111,7 @@ function OrcamentoPage() {
   const [prazo, setPrazo] = useState("");
   const [fotos, setFotos] = useState<File[]>([]);
   const [preferencia, setPreferencia] = useState("WhatsApp");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -134,7 +138,7 @@ function OrcamentoPage() {
   }
 
   function validate() {
-    const e: Record<string, string> = {};
+    const e: FormErrors = {};
     if (!nome.trim()) e.nome = "Informe seu nome completo.";
     const digits = whatsapp.replace(/\D/g, "");
     if (digits.length < 10) e.whatsapp = "Informe um WhatsApp válido com DDD.";
