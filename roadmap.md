@@ -1,9 +1,9 @@
 # Roadmap — Formulário de Orçamento YAMA
 
-- [ ] Migration: tabela `orcamentos` + `user_roles` + `has_role` + RLS + GRANTs
-- [ ] Bucket de storage `orcamento-fotos` (privado) + policies
-- [ ] Ativar login por e-mail (admin)
-- [ ] Rota `/orcamento`: formulário completo (dados, serviço, detalhes, fotos, contato) + validação + máscara de telefone + upload + tela de sucesso
-- [ ] Rota `/admin`: login + lista de pedidos + detalhes + ações de status + WhatsApp do cliente
-- [ ] Atualizar CTAs em `index.tsx`: header/hero → `/orcamento`; nova chamada após serviços e antes do rodapé
-- [ ] Testar fluxo completo end-to-end
+- [x] Migration: tabela `orcamentos` + `user_roles` + `has_role` + RLS + GRANTs
+- [x] Bucket de storage `orcamento-fotos` (privado) + policies
+- [x] Ativar login por e-mail (admin)
+- [x] Rota `/orcamento`: formulário completo + validação + máscara + upload + sucesso
+- [x] Rota `/admin`: login + lista + detalhes + ações de status + WhatsApp do cliente
+- [x] CTAs em `index.tsx` → `/orcamento`; chamadas após serviços e antes do rodapé
+- [x] Teste end-to-end (formulário → banco → painel) + mobile
