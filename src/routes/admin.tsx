@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, Loader2, LogOut, MessageCircle, X } from "lucide-react";
 import { YamaLogo } from "@/components/yama-logo";
+import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -57,7 +58,9 @@ function AdminPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modo, setModo] = useState<"login" | "registrar" | "recuperar">("login");
   const [authError, setAuthError] = useState("");
+  const [authMsg, setAuthMsg] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [lista, setLista] = useState<Orcamento[]>([]);
   const [loadingLista, setLoadingLista] = useState(false);
@@ -99,10 +102,46 @@ function AdminPage() {
   async function handleLogin(ev: React.FormEvent) {
     ev.preventDefault();
     setAuthError("");
+    setAuthMsg("");
     setAuthLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    if (modo === "login") {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) setAuthError("E-mail ou senha incorretos.");
+    } else if (modo === "registrar") {
+      const { error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: { emailRedirectTo: `${window.location.origin}/admin` },
+      });
+      if (error) {
+        setAuthError("Não foi possível criar a conta. Verifique os dados e tente novamente.");
+      } else {
+        setAuthMsg(
+          "Conta criada! Enviamos um e-mail de confirmação para você. Depois de confirmar, a equipe YAMA precisa liberar seu acesso ao painel."
+        );
+        setModo("login");
+      }
+    } else {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) {
+        setAuthError("Não foi possível enviar o e-mail de recuperação. Tente novamente.");
+      } else {
+        setAuthMsg("Enviamos um e-mail com o link para redefinir sua senha. Verifique sua caixa de entrada.");
+        setModo("login");
+      }
+    }
     setAuthLoading(false);
-    if (error) setAuthError("E-mail ou senha incorretos.");
+  }
+
+  async function handleGoogle() {
+    setAuthError("");
+    setAuthMsg("");
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: `${window.location.origin}/admin`,
+    });
+    if (result.error) setAuthError("Não foi possível entrar com o Google. Tente novamente.");
   }
 
   async function abrir(o: Orcamento) {
@@ -181,28 +220,104 @@ function AdminPage() {
                   required
                 />
               </div>
-              <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">Senha</label>
-                <input
-                  className={inputCls}
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Sua senha"
-                  autoComplete="current-password"
-                  required
-                />
-              </div>
+              {modo !== "recuperar" && (
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-foreground">Senha</label>
+                  <input
+                    className={inputCls}
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={modo === "registrar" ? "Crie uma senha (mín. 6 caracteres)" : "Sua senha"}
+                    autoComplete={modo === "registrar" ? "new-password" : "current-password"}
+                    minLength={modo === "registrar" ? 6 : undefined}
+                    required
+                  />
+                </div>
+              )}
               {authError && <p className="text-sm text-destructive">{authError}</p>}
+              {authMsg && <p className="text-sm leading-relaxed text-primary">{authMsg}</p>}
               <button
                 type="submit"
                 disabled={authLoading}
                 className="eyebrow flex w-full items-center justify-center gap-3 bg-primary px-8 py-4 text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 {authLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-                Entrar
+                {modo === "login" ? "Entrar" : modo === "registrar" ? "Criar conta" : "Enviar link de recuperação"}
               </button>
             </form>
+
+            {modo === "login" && (
+              <>
+                <div className="mt-6 flex items-center gap-4">
+                  <span className="h-px flex-1 bg-border" />
+                  <span className="text-xs text-muted-foreground">ou</span>
+                  <span className="h-px flex-1 bg-border" />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleGoogle}
+                  className="eyebrow mt-6 flex w-full items-center justify-center gap-3 border border-border px-8 py-4 text-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 16.25 5 12c0-4.1 3.2-7.27 7.2-7.27 3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10 5.35 0 9.25-3.67 9.25-9.09 0-1.15-.15-1.81-.15-1.81Z"
+                    />
+                  </svg>
+                  Entrar com Google
+                </button>
+              </>
+            )}
+
+            <div className="mt-8 space-y-3 text-center text-sm">
+              {modo === "login" && (
+                <>
+                  <p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModo("recuperar");
+                        setAuthError("");
+                        setAuthMsg("");
+                      }}
+                      className="text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+                    >
+                      Esqueceu sua senha?
+                    </button>
+                  </p>
+                  <p className="text-muted-foreground">
+                    Ainda não tem conta?{" "}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setModo("registrar");
+                        setAuthError("");
+                        setAuthMsg("");
+                      }}
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      Criar conta
+                    </button>
+                  </p>
+                </>
+              )}
+              {modo !== "login" && (
+                <p className="text-muted-foreground">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setModo("login");
+                      setAuthError("");
+                      setAuthMsg("");
+                    }}
+                    className="font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    Voltar para o login
+                  </button>
+                </p>
+              )}
+            </div>
           </div>
         ) : !isAdmin ? (
           <div className="mx-auto max-w-md py-12 text-center">
