@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Phone, Mail, Instagram, MessageCircle, Globe, ArrowUpRight } from "lucide-react";
 import { YamaLogo } from "@/components/yama-logo";
@@ -244,9 +244,12 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WaCta className="hidden border border-navy-foreground/40 px-5 py-3 hover:bg-navy-foreground hover:text-navy lg:inline-block">
+          <Link
+            to="/orcamento"
+            className="eyebrow hidden border border-navy-foreground/40 px-5 py-3 transition-colors hover:bg-navy-foreground hover:text-navy lg:inline-block"
+          >
             Solicitar orçamento
-          </WaCta>
+          </Link>
           <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -258,7 +261,13 @@ function Index() {
                 {l}
               </a>
             ))}
-            <WaCta className="mt-3 border border-navy-foreground/40 px-5 py-3">Solicitar orçamento</WaCta>
+            <Link
+              to="/orcamento"
+              onClick={() => setOpen(false)}
+              className="eyebrow mt-3 inline-block border border-navy-foreground/40 px-5 py-3"
+            >
+              Solicitar orçamento
+            </Link>
           </nav>
         )}
       </header>
@@ -274,7 +283,9 @@ function Index() {
             Há mais de 18 anos, transformando projetos com qualidade, segurança, sofisticação e excelente acabamento.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-6">
-            <WaCta className="bg-primary px-6 py-4 text-primary-foreground">Solicitar orçamento</WaCta>
+            <Link to="/orcamento" className="eyebrow bg-primary px-6 py-4 text-primary-foreground transition-opacity hover:opacity-90">
+              Solicitar orçamento
+            </Link>
             <a href="#servicos" className="eyebrow border-b border-primary/30 pb-1 text-primary">
               Conhecer nossos serviços
             </a>
@@ -354,6 +365,20 @@ function Index() {
                 </WaCta>
               </article>
             ))}
+          </div>
+        </div>
+        <div className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-6 py-20 text-center">
+            <h2 className="font-serif text-3xl text-primary md:text-4xl">Tem um projeto em mente?</h2>
+            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted-foreground">
+              Conte para a YAMA o que você precisa e solicite seu orçamento.
+            </p>
+            <Link
+              to="/orcamento"
+              className="eyebrow mt-8 inline-block bg-primary px-8 py-4 text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Solicitar orçamento
+            </Link>
           </div>
         </div>
       </section>
@@ -579,6 +604,26 @@ function Index() {
               </span>
             </li>
           </ul>
+        </div>
+      </section>
+
+      {/* Chamada final — Orçamento */}
+      <section className="border-t border-border bg-secondary">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-center">
+          <p className="eyebrow text-muted-foreground">Orçamento</p>
+          <h2 className="mt-4 font-serif text-3xl text-primary md:text-4xl">Pronto para tirar seu projeto do papel?</h2>
+          <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted-foreground">
+            Preencha nosso formulário e receba o retorno da equipe YAMA. É rápido, gratuito e sem compromisso.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link
+              to="/orcamento"
+              className="eyebrow bg-primary px-8 py-4 text-primary-foreground transition-opacity hover:opacity-90"
+            >
+              Solicitar orçamento
+            </Link>
+            <WaCta className="border border-primary/30 px-8 py-4 text-primary">Prefiro falar pelo WhatsApp</WaCta>
+          </div>
         </div>
       </section>
 
