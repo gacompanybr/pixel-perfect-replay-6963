@@ -110,7 +110,7 @@ function AdminPage() {
     setFotosUrls([]);
     if (o.fotos?.length) {
       const { data } = await supabase.storage.from("orcamento-fotos").createSignedUrls(o.fotos, 3600);
-      setFotosUrls((data ?? []).map((d) => d.signedUrl).filter(Boolean));
+      setFotosUrls((data ?? []).map((d) => d.signedUrl).filter((u): u is string => !!u));
     }
   }
 
