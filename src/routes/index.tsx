@@ -228,9 +228,10 @@ function Index() {
   return (
     <div className="bg-background text-foreground">
       <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
-        <div className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 md:h-36">
+        <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 md:h-32">
           <a href="#inicio" aria-label="YAMA Vidros e Alumínio">
-            <YamaLogo className="h-16 w-auto md:h-20" />
+            <YamaLogo className="h-14 w-auto md:h-[4.5rem]" />
+
 
           </a>
           <nav className="hidden items-center gap-8 lg:flex">
@@ -580,7 +581,7 @@ function Index() {
 
       <footer className="bg-navy text-navy-muted">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <YamaLogo className="h-12 w-auto" />
+          <YamaLogo className="h-10 w-auto" />
           <p className="text-xs">© {new Date().getFullYear()} YAMA Vidros e Alumínio · Duartina - SP</p>
         </div>
       </footer>
