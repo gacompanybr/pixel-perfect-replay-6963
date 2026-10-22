@@ -83,11 +83,6 @@ function AdminPage() {
       setIsAdmin(null);
       return;
     }
-    supabase.rpc("has_role", { _user_id: (await0 => await0)(undefined) as never, _role: "admin" } as never);
-  }, [session]);
-
-  useEffect(() => {
-    if (!session) return;
     (async () => {
       const { data: userData } = await supabase.auth.getUser();
       const uid = userData.user?.id;
