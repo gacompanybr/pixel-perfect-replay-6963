@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as OrcamentoRouteImport } from './routes/orcamento'
-import { Route as AdminResetPasswordRouteImport } from './routes/admin.reset-password'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,43 +29,44 @@ const OrcamentoRoute = OrcamentoRouteImport.update({
   path: '/orcamento',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminResetPasswordRoute = AdminResetPasswordRouteImport.update({
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
-  getParentRoute: () => AdminRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/admin': typeof AdminRoute
   '/orcamento': typeof OrcamentoRoute
-  '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/admin': typeof AdminRoute
   '/orcamento': typeof OrcamentoRoute
-  '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
+  '/admin': typeof AdminRoute
   '/orcamento': typeof OrcamentoRoute
-  '/admin/reset-password': typeof AdminResetPasswordRoute
+  '/reset-password': typeof ResetPasswordRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/orcamento' | '/admin/reset-password'
+  fullPaths: '/' | '/admin' | '/orcamento' | '/reset-password'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/orcamento' | '/admin/reset-password'
-  id: '__root__' | '/' | '/admin' | '/orcamento' | '/admin/reset-password'
+  to: '/' | '/admin' | '/orcamento' | '/reset-password'
+  id: '__root__' | '/' | '/admin' | '/orcamento' | '/reset-password'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRouteWithChildren
+  AdminRoute: typeof AdminRoute
   OrcamentoRoute: typeof OrcamentoRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -91,30 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrcamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/reset-password': {
-      id: '/admin/reset-password'
+    '/reset-password': {
+      id: '/reset-password'
       path: '/reset-password'
-      fullPath: '/admin/reset-password'
-      preLoaderRoute: typeof AdminResetPasswordRouteImport
-      parentRoute: typeof AdminRoute
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AdminRouteChildren {
-  AdminResetPasswordRoute: typeof AdminResetPasswordRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminResetPasswordRoute: AdminResetPasswordRoute,
-}
-
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRouteWithChildren,
+  AdminRoute: AdminRoute,
   OrcamentoRoute: OrcamentoRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
