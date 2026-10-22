@@ -109,5 +109,5 @@
   text-transform: uppercase;
   font-weight: 500;
 }
-html { scroll-behavior: smooth; scroll-padding-top: 9rem; }
+html { scroll-behavior: smooth; scroll-padding-top: 8.5rem; }
 body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
