@@ -228,9 +228,10 @@ function Index() {
   return (
     <div className="bg-background text-foreground">
       <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:h-24">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6 md:h-20">
           <a href="#inicio" aria-label="YAMA Vidros e Alumínio">
-            <YamaLogo className="h-11 w-auto md:h-14" />
+            <YamaLogo className="h-10 w-auto md:h-12" />
+
 
 
 
