@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Phone, Mail, Instagram, MessageCircle, Globe, ArrowUpRight } from "lucide-react";
-import logo from "@/assets/yama-logo.jpg.asset.json";
+import { YamaLogo } from "@/components/yama-logo";
 import hero from "@/assets/hero.jpg";
 import box from "@/assets/box.jpg";
 import quemSomos from "@/assets/quem-somos.webp";
@@ -228,9 +228,9 @@ function Index() {
   return (
     <div className="bg-background text-foreground">
       <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
-        <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6 md:h-28">
+        <div className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 md:h-36">
           <a href="#inicio" aria-label="YAMA Vidros e Alumínio">
-            <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-20 w-20 object-contain md:h-24 md:w-24" />
+            <YamaLogo className="h-16 w-auto md:h-20" />
 
           </a>
           <nav className="hidden items-center gap-8 lg:flex">
@@ -580,7 +580,7 @@ function Index() {
 
       <footer className="bg-navy text-navy-muted">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-16 w-16 object-contain" />
+          <YamaLogo className="h-12 w-auto" />
           <p className="text-xs">© {new Date().getFullYear()} YAMA Vidros e Alumínio · Duartina - SP</p>
         </div>
       </footer>
