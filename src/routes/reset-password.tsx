@@ -4,7 +4,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { YamaLogo } from "@/components/yama-logo";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/admin/reset-password")({
+export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
       { title: "Redefinir senha — YAMA Vidros e Alumínio" },

@@ -123,7 +123,7 @@ function AdminPage() {
       }
     } else {
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-        redirectTo: `${window.location.origin}/admin/reset-password`,
+        redirectTo: `${window.location.origin}/reset-password`,
       });
       if (error) {
         setAuthError("Não foi possível enviar o e-mail de recuperação. Tente novamente.");
