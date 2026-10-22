@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowLeft, Loader2, LogOut, MessageCircle, X } from "lucide-react";
 import { YamaLogo } from "@/components/yama-logo";
+import { lovable } from "@/integrations/lovable";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -57,7 +58,9 @@ function AdminPage() {
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [modo, setModo] = useState<"login" | "registrar" | "recuperar">("login");
   const [authError, setAuthError] = useState("");
+  const [authMsg, setAuthMsg] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
   const [lista, setLista] = useState<Orcamento[]>([]);
   const [loadingLista, setLoadingLista] = useState(false);
