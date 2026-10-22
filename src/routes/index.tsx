@@ -583,7 +583,7 @@ function Index() {
 
       <footer className="bg-navy text-navy-muted">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <YamaLogo className="h-7 w-auto" />
+          <YamaLogo className="h-10 w-auto" />
           <p className="text-xs">© {new Date().getFullYear()} YAMA Vidros e Alumínio · Duartina - SP</p>
         </div>
       </footer>
