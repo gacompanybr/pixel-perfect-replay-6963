@@ -102,10 +102,46 @@ function AdminPage() {
   async function handleLogin(ev: React.FormEvent) {
     ev.preventDefault();
     setAuthError("");
+    setAuthMsg("");
     setAuthLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+    if (modo === "login") {
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) setAuthError("E-mail ou senha incorretos.");
+    } else if (modo === "registrar") {
+      const { error } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: { emailRedirectTo: `${window.location.origin}/admin` },
+      });
+      if (error) {
+        setAuthError("Não foi possível criar a conta. Verifique os dados e tente novamente.");
+      } else {
+        setAuthMsg(
+          "Conta criada! Enviamos um e-mail de confirmação para você. Depois de confirmar, a equipe YAMA precisa liberar seu acesso ao painel."
+        );
+        setModo("login");
+      }
+    } else {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/admin/reset-password`,
+      });
+      if (error) {
+        setAuthError("Não foi possível enviar o e-mail de recuperação. Tente novamente.");
+      } else {
+        setAuthMsg("Enviamos um e-mail com o link para redefinir sua senha. Verifique sua caixa de entrada.");
+        setModo("login");
+      }
+    }
     setAuthLoading(false);
-    if (error) setAuthError("E-mail ou senha incorretos.");
+  }
+
+  async function handleGoogle() {
+    setAuthError("");
+    setAuthMsg("");
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: `${window.location.origin}/admin`,
+    });
+    if (result.error) setAuthError("Não foi possível entrar com o Google. Tente novamente.");
   }
 
   async function abrir(o: Orcamento) {
