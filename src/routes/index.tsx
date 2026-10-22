@@ -230,7 +230,7 @@ function Index() {
       <header className="sticky top-0 z-50 bg-navy text-navy-foreground">
         <div className="mx-auto flex h-28 max-w-6xl items-center justify-between px-6 md:h-36">
           <a href="#inicio" aria-label="YAMA Vidros e Alumínio">
-            <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-24 w-24 object-contain md:h-32 md:w-32" />
+            <YamaLogo className="h-16 w-auto md:h-20" />
 
           </a>
           <nav className="hidden items-center gap-8 lg:flex">
