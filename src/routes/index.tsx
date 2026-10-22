@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, MapPin, Phone, Mail, Instagram, MessageCircle, Globe, ArrowUpRight } from "lucide-react";
-import logo from "@/assets/yama-logo.jpg.asset.json";
+import { YamaLogo } from "@/components/yama-logo";
 import hero from "@/assets/hero.jpg";
 import box from "@/assets/box.jpg";
 import quemSomos from "@/assets/quem-somos.webp";
@@ -580,7 +580,7 @@ function Index() {
 
       <footer className="bg-navy text-navy-muted">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
-          <img src={logo.url} alt="YAMA Vidros e Alumínio" className="h-24 w-24 object-contain" />
+          <YamaLogo className="h-12 w-auto" />
           <p className="text-xs">© {new Date().getFullYear()} YAMA Vidros e Alumínio · Duartina - SP</p>
         </div>
       </footer>
