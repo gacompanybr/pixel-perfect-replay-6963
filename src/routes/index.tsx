@@ -275,7 +275,7 @@ function Index() {
       {/* Início */}
       <section id="inicio" className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 lg:min-h-[70vh] lg:grid-cols-12 lg:py-20">
         <div className="lg:col-span-5">
-          <p className="eyebrow inline-block border border-primary/30 px-4 py-2 text-primary">+18 anos de experiência</p>
+          <p className="eyebrow inline-block border border-primary/30 px-4 py-2 text-primary">18 anos de experiência</p>
           <h1 className="mt-8 font-serif text-4xl leading-tight text-primary md:text-5xl">
             Vidros e esquadrias de alumínio sob medida.
           </h1>
@@ -301,7 +301,7 @@ function Index() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="eyebrow text-muted-foreground">Quem somos</p>
-            <p className="mt-8 font-serif text-7xl text-primary">18+</p>
+            <p className="mt-8 font-serif text-7xl text-primary">18</p>
             <p className="mt-2 text-sm text-muted-foreground">anos de mercado</p>
             <img
               src={quemSomos}
